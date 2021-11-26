@@ -1,0 +1,11 @@
+version: '3.9'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/app/Dockerfile
+    ports:
+     - "3000:3000"
+    volumes:
+      - ./:/go/src/github.com/nagaihiroya/lets-golang-gin-docker
+    tty: true  
