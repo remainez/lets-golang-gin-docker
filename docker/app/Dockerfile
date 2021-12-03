@@ -13,4 +13,8 @@ RUN apk upgrade --update && \
 RUN go get -u github.com/cosmtrek/air && \
     go build -o /go/bin/air github.com/cosmtrek/air
 
+COPY go.mod go.mod
+COPY go.sum go.sum
+RUN go mod download
+
 CMD ["air", "-c", ".air.toml"]
