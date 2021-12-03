@@ -9,7 +9,7 @@ import (
 )
 
 type PlaylistHandler interface {
-    Get(c *gin.Context) string
+    Get(c *gin.Context)
 }
 
 type playlistHandler struct {
@@ -30,10 +30,11 @@ type responsePlaylist struct {
 	UpdatedAt string `json:"updated_at"`
 }
 
-func (ph *playlistHandler) Get(c *gin.Context) string {
+func (ph *playlistHandler) Get(c *gin.Context) {
 	playlist, err := ph.playlistUsecase.Get(c)
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, err.Error())
+		c.JSON(http.StatusBadRequest, err.Error())
+		return
 	}
 
 	res := responsePlaylist{
@@ -43,5 +44,5 @@ func (ph *playlistHandler) Get(c *gin.Context) string {
 		UpdatedAt: playlist.UpdatedAt,
 	}
 
-	return c.JSON(http.StatusOK, res)
+	c.JSON(http.StatusOK, res)
 }
