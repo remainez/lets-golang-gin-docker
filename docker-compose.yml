@@ -8,4 +8,33 @@ services:
      - "3000:3000"
     volumes:
       - ./:/go/src/github.com/nagaihiroya/lets-golang-gin-docker
-    tty: true  
+    tty: true
+
+  dynamodb-local:
+    image: amazon/dynamodb-local:latest
+    user: root
+    command: -jar DynamoDBLocal.jar -sharedDb -dbPath /data
+    volumes:
+      - dynamodb-local-data:/data
+    ports:
+      - 8000:8000
+    networks:
+      - dynamodb-local-network
+
+  dynamodb-admin:
+    image: aaronshaf/dynamodb-admin:latest
+    environment:
+      - DYNAMO_ENDPOINT=dynamodb-local:8000
+    ports:
+      - 8001:8001
+    depends_on:
+      - dynamodb-local
+    networks:
+      - dynamodb-local-network
+
+volumes:
+  dynamodb-local-data:
+
+networks:
+  dynamodb-local-network:
+    driver: bridge
