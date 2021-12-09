@@ -1,30 +1,29 @@
 package handler
 
 import (
-    "net/http"
+	"net/http"
 
-    "github.com/nagaihiroya/lets-golang-gin-docker/pkg/usecase"
+	"github.com/nagaihiroya/lets-golang-gin-docker/pkg/usecase"
 
 	"github.com/gin-gonic/gin"
 )
 
 type PlaylistHandler interface {
-    Get(c *gin.Context)
+	Get(c *gin.Context)
 }
 
 type playlistHandler struct {
-    playlistUsecase usecase.PlaylistUsecase
+	playlistUsecase usecase.PlaylistUsecase
 }
 
 func NewPlaylistHandler(playlistUsecase usecase.PlaylistUsecase) PlaylistHandler {
-    return &playlistHandler{
-        playlistUsecase: playlistUsecase,
-    }
+	return &playlistHandler{
+		playlistUsecase: playlistUsecase,
+	}
 }
 
-
 type responsePlaylist struct {
-    Id int `json:"id"`
+	Id        int    `json:"id"`
 	SourceUrl string `json:"source_url"`
 	CreatedAt string `json:"created_at"`
 	UpdatedAt string `json:"updated_at"`
@@ -38,7 +37,7 @@ func (ph *playlistHandler) Get(c *gin.Context) {
 	}
 
 	res := responsePlaylist{
-		Id: playlist.Id,
+		Id:        playlist.Id,
 		SourceUrl: playlist.SourceUrl,
 		CreatedAt: playlist.CreatedAt,
 		UpdatedAt: playlist.UpdatedAt,

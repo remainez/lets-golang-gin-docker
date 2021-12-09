@@ -5,10 +5,10 @@ package model
 // )
 
 type Playlist struct {
-	Id int
+	Id        int
 	CreatedAt string
 	UpdatedAt string
 	// CreatedAt time.Time
 	// UpdatedAt time.Time
-    SourceUrl string
+	SourceUrl string
 }

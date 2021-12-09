@@ -8,5 +8,5 @@ import (
 
 type PlaylistRepository interface {
 	// Create(playlist *model.Playlist) (*model.Playlist, error)
-    Get(ctx context.Context) (model.Playlist, error)
+	Get(ctx context.Context) (model.Playlist, error)
 }

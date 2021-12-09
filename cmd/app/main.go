@@ -4,16 +4,16 @@ import (
 	"log"
 
 	"github.com/nagaihiroya/lets-golang-gin-docker/pkg/infrastructure"
-	"github.com/nagaihiroya/lets-golang-gin-docker/pkg/usecase"
 	"github.com/nagaihiroya/lets-golang-gin-docker/pkg/interfaces/handler"
+	"github.com/nagaihiroya/lets-golang-gin-docker/pkg/usecase"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-    playlistRepository := infrastructure.NewPlaylistRepository()
-    playlistUsecase := usecase.NewPlaylistUsecase(playlistRepository)
-    playlistHandler := handler.NewPlaylistHandler(playlistUsecase)
+	playlistRepository := infrastructure.NewPlaylistRepository()
+	playlistUsecase := usecase.NewPlaylistUsecase(playlistRepository)
+	playlistHandler := handler.NewPlaylistHandler(playlistUsecase)
 
 	router := gin.Default()
 	router.GET("/healthcheck", func(c *gin.Context) {

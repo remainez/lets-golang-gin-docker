@@ -13,6 +13,10 @@ RUN apk upgrade --update && \
 RUN go get -u github.com/cosmtrek/air && \
     go build -o /go/bin/air github.com/cosmtrek/air
 
+RUN go install golang.org/x/tools/gopls@latest
+RUN go install golang.org/x/lint/golint@latest
+RUN go install github.com/josharian/impl@latest
+
 COPY go.mod go.mod
 COPY go.sum go.sum
 RUN go mod download
